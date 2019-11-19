@@ -63,5 +63,5 @@ bool isVowel(string character){
 }
 
 bool isBadInput(string character){
-    return regex_match(character, regex("[^A-Za-z\\s]"));
+    return regex_match(character, regex("[^[:alpha:]\\s]"));
 }
