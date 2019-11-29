@@ -1,7 +1,3 @@
-//
-// Created by Brett Morrison on 2019-11-27.
-//
-
 #include <iostream>
 #include <string>
 
@@ -19,13 +15,13 @@ struct song {
 
 void printLibrary(song**, int);
 song** songsFromYear(song **songs, int size, int year, int* resultSize);
-void deallocateMemory(song**);
+void deallocateMemory(song**, int);
 void addSongs(song**, int);
 
 int main(){
 
     int LIBRARY_SIZE = 10;
-    song *songLibrary[LIBRARY_SIZE];
+    song **songLibrary = new song*[LIBRARY_SIZE];
 
     addSongs(songLibrary, LIBRARY_SIZE);
     printLibrary(songLibrary, LIBRARY_SIZE);
@@ -37,19 +33,22 @@ int main(){
     song **resultArray = songsFromYear(songLibrary, LIBRARY_SIZE, 2014, &resultSize);
     printLibrary(resultArray, resultSize);
 //    printLibrary(songsFromYear(songLibrary, LIBRARY_SIZE, 2014, &resultSize), resultSize);
-//    deallocateMemory(resultArray);
+    cout << "Clearing filtered song library.." << endl;
+    deallocateMemory(resultArray, resultSize);
 
-    cout << "-----------" << endl;
+    cout << "\n-----------" << endl;
 
     resultSize = 0;
     resultArray = songsFromYear(songLibrary, LIBRARY_SIZE, 2016, &resultSize);
     printLibrary(resultArray, resultSize);
-//    deallocateMemory(resultArray);
+    cout << "Clearing filtered song library.." << endl;
+    deallocateMemory(resultArray, resultSize);
 
-    cout << "-----------" << endl;
+    cout << "\n-----------" << endl;
 
-//    deallocateMemory(songLibrary);
-    printLibrary(songLibrary, LIBRARY_SIZE);
+    cout << "\nClearing main song library.." << endl;
+    deallocateMemory(songLibrary, LIBRARY_SIZE);
+//    printLibrary(songLibrary, LIBRARY_SIZE);
 
     return 0;
 }
@@ -89,8 +88,6 @@ void addSongs(song **songLibrary, int size) {
 
 }
 
-// TODO - Define a function with the following signature. It will return a dynamically allocated
-//  array consisting of all songs in the parameter array from the given year.
 song** songsFromYear(song **songs, int size, int year, int* resultSize){
 
     // resultSize starts pointing to 0
@@ -110,12 +107,12 @@ song** songsFromYear(song **songs, int size, int year, int* resultSize){
     return resultArray;
 }
 
-void deallocateMemory(song **library){
+void deallocateMemory(song **library, int size){
 
     //TODO Be sure to properly deallocate all dynamically allocated memory. For every
     // call to new, there should be a corresponding delete or delete[].
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < size; i++){
         if(library[i] != nullptr)
             delete library[i];
         library[i] = nullptr;
