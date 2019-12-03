@@ -31,7 +31,7 @@
 #include <iostream>
 using namespace std;
 
-float getAverageScore(int, int);
+float getAverageScore(int*, int);
 
 int main(){
     const int ARRAY_SIZE = 10;
@@ -39,7 +39,6 @@ int main(){
     int scores[ARRAY_SIZE];
 
     for(int i = 0; i < ARRAY_SIZE; i += 2){
-        scores[i] = new int;
         scores[i] = i;
     }
 
@@ -51,10 +50,7 @@ int main(){
 float getAverageScore(int* scoreArray, int size){
     float total = 0;
     for(int i = 0; i < size; i++){
-        if(scoreArray[i] != nullptr) {
-            total += scoreArray[i];
-        }
+        total += scoreArray[i];
     }
-
     return total / size;
 }
