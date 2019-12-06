@@ -12,8 +12,6 @@ public class TestClass {
         ReadThis r4 = new ReadThis("position 4");
         
         ReadThis r5 = new ReadThis("position 5");
-
-        
         
         /*
          We can manually create a linked list

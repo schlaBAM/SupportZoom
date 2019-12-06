@@ -3,7 +3,6 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
 
         LegoMinifigure person = new LegoMinifigure("Bob", new LegoHat("touque", 1));
         System.out.println(person.toString());
