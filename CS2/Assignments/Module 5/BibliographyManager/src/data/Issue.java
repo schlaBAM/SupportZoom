@@ -30,33 +30,19 @@ public class Issue {
         return yearPublished;
     }
 
-    public void setYearPublished(int yearPublished) {
-        this.yearPublished = yearPublished;
-    }
-
     public int getVolumeNumber() {
         return volumeNumber;
-    }
-
-    public void setVolumeNumber(int volumeNumber) {
-        this.volumeNumber = volumeNumber;
     }
 
     public int getIssueNumber() {
         return issueNumber;
     }
 
-    public void setIssueNumber(int issueNumber) {
-        this.issueNumber = issueNumber;
-    }
-
     public ArrayList<Article> getArticles() {
         return articles;
     }
 
-    public void addArticles(ArrayList<Article> articles, Article articleToAdd) {
-        this.articles.add(articleToAdd);
-    }
+    public void addArticle(Article articleToAdd){this.articles.add(articleToAdd);}
 
     public Journal getJournal() {
         return journal;

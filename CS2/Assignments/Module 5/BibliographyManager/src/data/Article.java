@@ -7,10 +7,6 @@ public class Article {
     private int id;
     private static int currentID = 0;
 
-    public Article(){
-        //boilerplate for generation from the console.
-    }
-
     public Article(String title, String author){
         //if there's no issue to assign to
         this.title = title;
@@ -26,7 +22,7 @@ public class Article {
     }
 
     public String toString(){
-        return "\"" + title + "\": " + author + ".";
+        return "\t\"" + title + "\": " + author + ".\n";
     }
 
     public String getTitle() {

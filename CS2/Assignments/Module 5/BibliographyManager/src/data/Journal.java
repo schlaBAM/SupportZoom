@@ -1,6 +1,7 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Journal {
 
@@ -17,6 +18,63 @@ public class Journal {
 
     public int getId(){
         return id;
+    }
+
+    public String getMostPublishedAuthor(){
+
+        HashMap<String, Integer> results = new HashMap<>();
+
+        if(this.getIssues().size() >0) {
+//            for (Issue i : this.getIssues()) {
+//                System.out.println("hey");
+//
+//                if(i.getArticles().size() > 0) {
+//                    System.out.println("hey");
+//
+//                    for (Article a : i.getArticles()) {
+//
+//                        String temp = a.getAuthor();
+//
+//                        if (results.get(temp) != null) {
+//                            int num = results.get(temp);
+//                            results.put(temp, num + 1);
+//                        } else {
+//                            results.put(temp, 1);
+//                        }
+//                    }
+//                }
+//            }
+        }
+        //TODO - Simplify.
+        //return results.entrySet().stream().max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+        return "poo";
+    }
+
+    public String viewArticles(int fromYear){
+        //TODO - Doesn't currently work right.
+        boolean flag = false; //used if no results found
+        String result = "Articles from the year " + fromYear + ":\n";
+
+        for(Issue i: this.getIssues()) {
+            if(i.getYearPublished() == fromYear) {
+                for (Article a : i.getArticles()) {
+                    result += a.toString();
+                }
+            }
+        }
+
+        if(!flag){
+            result += "No results found.\n";
+        }
+        return result;
+    }
+
+    public ArrayList<Issue> getIssues(){
+        return issues;
+    }
+
+    public void setIssues(ArrayList<Issue> issues) {
+        this.issues = issues;
     }
 
     public static ArrayList<Journal> getSampleJournals(){
