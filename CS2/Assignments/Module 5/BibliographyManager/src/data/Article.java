@@ -33,14 +33,6 @@ public class Article {
         return author;
     }
 
-    public Issue getIssue() {
-        return issue;
-    }
-
-    public void setIssueReference(Issue issue) {
-        this.issue = issue;
-    }
-
     public int getId() {
         return id;
     }

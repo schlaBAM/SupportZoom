@@ -4,16 +4,8 @@ import java.util.ArrayList;
 
 public class Issue {
 
-    private int yearPublished, volumeNumber, issueNumber, id;
+    private int yearPublished, volumeNumber, issueNumber;
     private ArrayList<Article> articles;
-    private Journal journal;
-    private static int currentID = 0;
-
-    public Issue(int yearPublished, int volumeNumber, int issueNumber){
-        this.yearPublished = yearPublished;
-        this.volumeNumber = volumeNumber;
-        this.issueNumber = issueNumber;
-    }
 
     public Issue(int yearPublished, int volumeNumber, int issueNumber, ArrayList<Article> articles){
         this.yearPublished = yearPublished;
@@ -43,13 +35,5 @@ public class Issue {
     }
 
     public void addArticle(Article articleToAdd){this.articles.add(articleToAdd);}
-
-    public Journal getJournal() {
-        return journal;
-    }
-
-    public void setJournalReference(Journal journal) {
-        this.journal = journal;
-    }
 
 }

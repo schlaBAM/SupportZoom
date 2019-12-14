@@ -11,27 +11,38 @@ public class BibliographyDatabase {
     }
 
     public void viewArticlesFromYear(int number){
+        String result = "Articles from the year " + number + ":\n";
+
         for(Journal j : database){
-                j.viewArticles(number);
+               result += j.viewArticles(number);
         }
+
+        if(result.equals("Articles from the year " + number + ":\n")){
+            result += "No results found.\n";
+        }
+
+        System.out.println(result);
     }
 
     public void mostPublishedAuthor(){
         for(Journal j : database){
-            System.out.println(j.getMostPublishedAuthor());
+            System.out.println("Most published author(s) in journal \"" +j.getTitle() +"\": \n" + j.getMostPublishedAuthor());
         }
     }
 
     public int getAvailableJournals(){
-        return database.size();
+        return database.size() - 1;
     }
 
     // ----- Article Mutations -----
     public void addArticle(int journalNum, int issueNum, String title, String author){
-
-        database.get(journalNum).getIssues().get(issueNum).addArticle(new Article(title, author));
-        System.out.println("Article successfully added.");
-
+        if(database.get(journalNum) != null && database.get(journalNum).getIssues().get(issueNum) != null) {
+            database.get(journalNum).getIssues().get(issueNum).addArticle(new Article(title, author));
+            System.out.println("Article successfully added.");
+        } else {
+            System.out.println("Article add unsuccessful.");
+            //should never hit here - I default to zero for inputs if user messes around.
+        }
     }
 
     public boolean removeArticle(Article articleToRemove){
@@ -81,7 +92,7 @@ public class BibliographyDatabase {
 
     public int getAvailableIssues(int id){
         if(database.get(id) != null){
-            return database.get(id).getIssues().size();
+            return database.get(id).getIssues().size() - 1;
         } else {
             return 0;
         }
