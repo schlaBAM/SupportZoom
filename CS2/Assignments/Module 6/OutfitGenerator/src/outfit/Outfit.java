@@ -2,101 +2,86 @@ package outfit;
 
 import java.util.ArrayList;
 
-public class Outfit extends OutfitGenerator {
+public class Outfit {
 
-   protected enum Season {SPRING, SUMMER, FALL, WINTER}
+    protected ArrayList<ArticleOfClothing> clothes = new ArrayList<>();
 
-    protected enum Style {FORMAL, CASUAL} //TODO
+    public Outfit(){}
 
-    String season, color, style, gender;
-    ArrayList<ArticleOfClothing> clothes = new ArrayList<>();
-
-    public Outfit(String season, String style, String color, String gender){
-        this.season = season;
-        this.style = style;
-        this.color = color;
-        this.gender = gender;
+    public Outfit(ArrayList<ArticleOfClothing> clothes){
+        this.clothes = clothes;
     }
 
-    public boolean isColorful(){
-        return this.color != "plain";
+    private boolean isEntireOutfitPlain() {
+        for (ArticleOfClothing a : clothes) {
+            if (a.isColorful()) {
+                 return false;
+            }
+        }
+        return true;
     }
 
-    public boolean isCasualStyle(){
-        return this.style == "casual";
+    private boolean isOutfitForGender(String gender) {
+        if (gender.equals("skip")) {
+            return true; // all clothes will work
+        } else {
+            for (ArticleOfClothing a : clothes) {
+                if (!a.getGender().equals(gender) && !a.getGender().equals("both")) {
+                    return false;
+                }
+            }
+        }
+        return true; // returns true if conditional is never met
     }
 
-    public boolean isForGender(ArticleOfClothing article){
-        return article.getGender() == this.gender || article.getGender() == "both";
+    private boolean outfitMatchesSeason(String season) {
+        for (ArticleOfClothing a : clothes) {
+            if (!a.getSeason().equals(season) && !a.getGender().equals("all")) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public boolean isEntireOutfitPlain(){
-        return false; //TODO
+    private boolean outfitMatchesStyle(String style){
+        for (ArticleOfClothing a : clothes) {
+            if (!a.getSeason().equals(style)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean canBeWornWith(ArticleOfClothing a, ArticleOfClothing b){
         /*
-        A shirt that is not good with dress shoes shouldn’t be worn with dress shoes
-A winter jacket shouldn’t be worn with shorts
-A tie shouldn’t be worn with jeans
-Blue and green together should be avoided
+        //TODO
+        A shirt that is not good with dress shoes shouldn’t be worn with dress shoes (tshirt, tubetop, sleeveless)
+        A winter jacket shouldn’t be worn with shorts (match on seasons)
+        A tie shouldn’t be worn with jeans
+        Blue and green together should be avoided
+        Gucci Overcoat must be worn with necklace or rolex
          */
     return false;
     }
 
-    public boolean areComplimentingColors(){
+    public boolean isGoodOutfit(String season, String style, String gender){
+
+        if(isEntireOutfitPlain()) return false;
+
+        if(!isOutfitForGender(gender)) return false;
+
+        if(!outfitMatchesSeason(season)) return false;
+
+        if(!outfitMatchesStyle(style)) return false;
+
+        return true;
+    }
+
+    public boolean areComplimentingColors(ArticleOfClothing a, ArticleOfClothing b){
         boolean blueFound = false, greenFound = false, redFound = false, brownFound = false, blackFound = false, purpleFound = false;
 
-        for(ArticleOfClothing a : this.clothes){} //TODO
+        for(ArticleOfClothing article : this.clothes){} //TODO
         return false;
     }
-//    public boolean isNotNaked();
 
-    protected int getSize(){
-        return 0;
-    }
-
-    // tried making a single func for next two functions but became far too complex.
-    protected static String getSeasons(){
-
-        String result = "";
-        for(Season season : Season.values()){
-            String seasonString = season.toString();
-            result += seasonString.substring(0,1) + seasonString.substring(1).toLowerCase() + "\n";
-        }
-        return result;
-    }
-
-    protected static String getStyles(){
-        String result = "";
-        for(Style style : Style.values()){
-            String styleString = style.toString();
-            result += styleString.substring(0,1) + styleString.substring(1).toLowerCase() + "\n";
-        }
-        return result;
-    }
-
-    protected ArrayList<ArrayList<ArticleOfClothing>> createOutfit(){
-        return Closet.generateCloset();
-    }
-
-//    @Override
-//    public boolean canBeWornWith() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isGoodCombo() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean areComplimentingColors() {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean isNotNaked() {
-//        return false;
-//    }
 }

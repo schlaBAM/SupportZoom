@@ -6,4 +6,5 @@ public interface ClothesInterface {
     String getStyle();
     String getSeason();
     String getColor();
+    String toString();
 }

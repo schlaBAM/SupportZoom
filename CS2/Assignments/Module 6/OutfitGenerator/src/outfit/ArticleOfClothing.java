@@ -13,6 +13,18 @@ public class ArticleOfClothing implements ClothesInterface {
         this.gender = gender;
     }
 
+    public boolean isColorful(){
+        return !this.color.equals("plain");
+    }
+
+    public boolean isCasualStyle(){
+        return this.style == "casual";
+    }
+
+    public boolean isForGender(ArticleOfClothing article){
+        return article.getGender() == this.gender || article.getGender() == "both";
+    }
+
     @Override
     public String getGender() {
         return gender;
@@ -32,5 +44,6 @@ public class ArticleOfClothing implements ClothesInterface {
     public String getColor() {
         return color;
     }
+
 }
 
