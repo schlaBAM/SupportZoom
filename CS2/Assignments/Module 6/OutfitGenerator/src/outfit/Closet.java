@@ -33,7 +33,7 @@ public class Closet {
         Joggers joggers = new Joggers("all", "black", "casual", "male");
         Khakis khakis = new Khakis("fall", "green", "formal", "male");
         Shorts shorts = new Shorts("summer", "plain", "casual", "both");
-        Slacks slacks = new Slacks("all", "plain", "formal", "both");
+        Slacks slacks = new Slacks("all", "purple", "formal", "both");
         Skirt skirt = new Skirt("summer", "red", "casual", "female");
 
         pants = addToList(capris, jeans, joggers, khakis, shorts, slacks, skirt);
@@ -43,7 +43,7 @@ public class Closet {
         RunningShoes runningShoes = new RunningShoes("all", "green", "casual", "both");
         Sandals sandals = new Sandals("summer", "plain", "casual", "both");
         SnowBoots snowBoots = new SnowBoots("winter", "brown", "casual", "both");
-        SteelToedBoots steelToedBoots = new SteelToedBoots("all", "plain", "casual", "male");
+        SteelToedBoots steelToedBoots = new SteelToedBoots("all", "purple", "casual", "male");
         Timberlands timberlands = new Timberlands("fall", "brown", "casual", "male");
 
         shoes = addToList(dressShoes, heels, runningShoes, sandals, snowBoots, steelToedBoots, timberlands);
@@ -54,7 +54,7 @@ public class Closet {
         TrenchCoat trenchCoat = new TrenchCoat("fall", "plain", "casual", "male");
         Vest vest = new Vest("fall", "red", "casual", "both");
         WinterJacket winterJacket = new WinterJacket("winter", "blue", "casual", "both");
-        GucciOvercoat gucciOvercoat = new GucciOvercoat("summer", "plain", "formal", "summer");
+        GucciOvercoat gucciOvercoat = new GucciOvercoat("all", "plain", "formal", "summer");
 
         outerwear = addToList(blazer, parka, springCoat, trenchCoat, vest, winterJacket, gucciOvercoat);
 
@@ -63,7 +63,7 @@ public class Closet {
         Ring ring = new Ring("all", "gold", "casual", "both");
         Rolex rolex = new Rolex("all", "ballin", "formal", "male");
         Sunglasses sunglasses = new Sunglasses("summer", "black", "casual", "both");
-        Tie tie = new Tie("all", "blue", "formal", "male");
+        Tie tie = new Tie("all", "purple", "formal", "male");
         Watch watch = new Watch("all", "red", "casual", "both");
 
         accessories = addToList(earrings, necklace, ring, rolex, sunglasses, tie, watch);
@@ -81,7 +81,7 @@ public class Closet {
 
     }
 
-    static ArrayList<ArticleOfClothing> addToList(ArticleOfClothing... items){
+    private static ArrayList<ArticleOfClothing> addToList(ArticleOfClothing... items){
         ArrayList<ArticleOfClothing> list = new ArrayList<>();
         for(ArticleOfClothing item : items){
             list.add(item);

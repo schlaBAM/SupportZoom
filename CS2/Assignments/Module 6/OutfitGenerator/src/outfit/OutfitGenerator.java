@@ -24,7 +24,7 @@ public class OutfitGenerator {
 
 
         // ask to select available style for season
-        System.out.println("\nWhat style are you wanting to wear?\n" + getStyles()+ "\n ");
+        System.out.println("\nWhat style are you wanting to wear?\n" + getStyles());
 
         // get style input
         String style = checkInput(scan.nextLine(), "style");
@@ -37,7 +37,7 @@ public class OutfitGenerator {
         String gender = checkInput(scan.nextLine(), "gender");
 
         //generate outfit from closet with above params
-        createOutfit(season, style, gender);
+        System.out.println(createOutfit(season, style, gender));
     }
 
     private String checkInput(String input, String paramToCheck){
@@ -47,7 +47,7 @@ public class OutfitGenerator {
         switch(paramToCheck){
             case "season":
                 String[] seasons = new String[]{"spring", "summer", "fall", "winter"};
-                if(input == seasons[0] || input == seasons[1] || input == seasons[2] || input == seasons[3]){
+                if(input.equals(seasons[0]) || input.equals(seasons[1]) || input.equals(seasons[2]) || input.equals(seasons[3])){
                     return input;
                 } else {
                     Random rand = new Random();
@@ -55,7 +55,7 @@ public class OutfitGenerator {
                 }
             case "style":
                 String[] styles = new String[]{"casual", "formal"};
-                if(input == styles[0] || input == styles[1]){
+                if(input.equals(styles[0]) || input.equals(styles[1])){
                     return input;
                 } else {
                     Random rand = new Random();
@@ -63,7 +63,7 @@ public class OutfitGenerator {
                 }
             case "gender":
                 String[] genders = new String[]{"male", "female", "skip"};
-                if(input == genders[0] || input == genders[1] || input == genders[2]){
+                if(input.equals(genders[0]) || input.equals(genders[1]) || input.equals(genders[2])){
                     return input;
                 } else {
                     Random rand = new Random();
@@ -110,12 +110,13 @@ public class OutfitGenerator {
                 outfit.clothes.add(list.get(index)); // add random article of clothing from each list to outfit
             }
 
-            // does checks on articles of clothing + ensures correct params
+        // does checks on articles of clothing + ensures correct params
             foundOutfit = outfit.isGoodOutfit(season, style, gender);
+            if(!foundOutfit) {outfit.clothes.clear();}
         }
 
-        String result = "After " + count + " attempts, we have found your perfect outfit!" +
-                " Here's what you'll be wearing:\n";
+        String result = "\nAfter " + count + " attempts, we have found your perfect outfit!" +
+                "\nYou requested " + style + " clothes for " + season + ". Here's what you'll be wearing:\n";
 
         for(ArticleOfClothing c : outfit.clothes){
             result += "\t" + c.toString() + "\n";

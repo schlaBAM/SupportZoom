@@ -12,6 +12,15 @@ public class Outfit {
         this.clothes = clothes;
     }
 
+    private boolean isWearingJersey(){
+        for (ArticleOfClothing a : clothes) {
+            if (a.getClass().getSimpleName().equals("Jersey")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean isEntireOutfitPlain() {
         for (ArticleOfClothing a : clothes) {
             if (a.isColorful()) {
@@ -26,7 +35,7 @@ public class Outfit {
             return true; // all clothes will work
         } else {
             for (ArticleOfClothing a : clothes) {
-                if (!a.getGender().equals(gender) && !a.getGender().equals("both")) {
+                if (!a.isForGender(gender)) {
                     return false;
                 }
             }
@@ -36,7 +45,7 @@ public class Outfit {
 
     private boolean outfitMatchesSeason(String season) {
         for (ArticleOfClothing a : clothes) {
-            if (!a.getSeason().equals(season) && !a.getGender().equals("all")) {
+            if (!a.getSeason().equals(season) && !a.getSeason().equals("all")) {
                 return false;
             }
         }
@@ -45,26 +54,52 @@ public class Outfit {
 
     private boolean outfitMatchesStyle(String style){
         for (ArticleOfClothing a : clothes) {
-            if (!a.getSeason().equals(style)) {
+            if (!a.getStyle().equals(style)) {
                 return false;
             }
         }
         return true;
     }
 
-    public boolean canBeWornWith(ArticleOfClothing a, ArticleOfClothing b){
-        /*
-        //TODO
-        A shirt that is not good with dress shoes shouldn’t be worn with dress shoes (tshirt, tubetop, sleeveless)
-        A winter jacket shouldn’t be worn with shorts (match on seasons)
-        A tie shouldn’t be worn with jeans
-        Blue and green together should be avoided
-        Gucci Overcoat must be worn with necklace or rolex
-         */
-    return false;
+    private boolean isOutfitClashing(){
+        boolean blueArticle = false, greenArticle = false, brownArticle = false, purpleArticle = false, redArticle = false;
+
+        for (ArticleOfClothing a : clothes) {
+            switch(a.getColor()){
+                case "green":
+                    greenArticle = true;
+                    break;
+                case "blue":
+                    blueArticle = true;
+                    break;
+                case "brown":
+                    brownArticle = true;
+                    break;
+                case "purple":
+                    purpleArticle = true;
+                    break;
+                case "red":
+                    redArticle = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return ((blueArticle && greenArticle) || (brownArticle && purpleArticle) || (redArticle && brownArticle));
+    }
+
+    private boolean followsExtraRules(){
+        for (ArticleOfClothing a : clothes) {
+            if(!a.canBeWornWith(clothes)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean isGoodOutfit(String season, String style, String gender){
+
+        //if(isWearingJersey()) return true; // no matter what they're wearing a jersey is an override
 
         if(isEntireOutfitPlain()) return false;
 
@@ -74,14 +109,11 @@ public class Outfit {
 
         if(!outfitMatchesStyle(style)) return false;
 
+        if(isOutfitClashing()) return false;
+
+        if(!followsExtraRules()) return false;
+
         return true;
-    }
-
-    public boolean areComplimentingColors(ArticleOfClothing a, ArticleOfClothing b){
-        boolean blueFound = false, greenFound = false, redFound = false, brownFound = false, blackFound = false, purpleFound = false;
-
-        for(ArticleOfClothing article : this.clothes){} //TODO
-        return false;
     }
 
 }

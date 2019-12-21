@@ -6,7 +6,11 @@ public abstract class Shoes extends ArticleOfClothing {
         super(season, color, style, gender);
     }
 
-    public abstract boolean isFancy();
-    public abstract boolean isPlain();
+//    public abstract boolean isFancy();
+//    public abstract boolean isPlain();
+
+    public String toString(){
+        return "- A pair of " + getColor().substring(0,1).toUpperCase() + getColor().substring(1) + " " + getClass().getSimpleName();
+    }
 
 }
